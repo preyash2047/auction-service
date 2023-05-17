@@ -15,14 +15,14 @@ provider:
       Action:
         - dynamodb:PutItem
       Resource:
-        - arn:aws:dynamodb:eu-west-1:715867543317:table/AuctionsTable
+        - arn:aws:dynamodb:eu-west-1:715867543317:table/Auctions
   
 resources:
   Resources:
-    AuctionsTable:
+    Auctions:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: AuctionsTable
+        TableName: Auctions
         BillingMode: PAY_PER_REQUEST
         AttributeDefinitions:
           - AttributeName: id
