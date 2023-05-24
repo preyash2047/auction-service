@@ -1,6 +1,8 @@
 import AWS from "aws-sdk";
 import commonMiddleware from "../lib/commonMiddleware";
+import validator from "@middy/validator";
 import createError from "http-errors";
+import getAuctionsSchema from "../lib/schemas/getAuctionsSchema";
 
 const dynamodb = new AWS.DynamoDB.DocumentClient();
 
@@ -19,9 +21,11 @@ async function getAuctions(event, context) {
   }
 
   return {
-    statusCode: 201,
+    statusCode: 200,
     body: JSON.stringify(auctions),
   };
 }
 
-export const handler = commonMiddleware(getAuctions);
+export const handler = commonMiddleware(getAuctions).use(
+  validator({ inputSchema: getAuctionsSchema, useDefaults: true })
+);
